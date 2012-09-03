@@ -3,8 +3,8 @@
 'use strict';
 
 function parseURL(url) {
-  var parser = document.createElement();
-  parser.href = url;
+  var parser = document.createElement('a');
+  parser.href = url.replace(/^view-source:/, '');
   return {
     'protocol': parser.protocol,
     'hostname': parser.hostname,
@@ -22,7 +22,7 @@ var template = document.getElementById('template').innerHTML;
 var context = {
   logs: data,
   domain: function() {
-    return parseURL(this).hostname;
+    return parseURL(this.url).hostname;
   }
 };
 logElem.innerHTML = Mustache.render(template, context);
