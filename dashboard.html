@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zilean Dashboard</title>
+  <script type="text/mustache" id="template">
+  <table>
+    {{#logs}}
+    <tr>
+      {{#url}}
+      <td><a href="{{url}}">{{domain}}</a></td><td>{{time}}</td>
+      {{/url}}
+    </tr>
+    {{/logs}}
+  </table>
+  </script>
+</head>
+<body>
+<h1>Dashboard</h1>
+<div id="log"></div>
+<script src="contrib/mustache.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

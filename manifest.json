@@ -1,0 +1,16 @@
+{
+  "name": "Zilean",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Zilean, the Chronokeeper.",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": "res/icon/development.png"
+  },
+  "permissions": [
+    "tabs",
+    "background"
+  ]
+}
