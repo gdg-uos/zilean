@@ -2,15 +2,23 @@
 <html>
 <head>
   <title>Zilean Dashboard</title>
+  <link rel="stylesheet" href="contrib/bootstrap/css/bootstrap.css" />
   <script type="text/mustache" id="template">
-  <table>
-    {{#logs}}
+  <table class="table table-hover">
+  {{#summary}}
     <tr>
-      {{#url}}
-      <td><a href="{{url}}">{{domain}}</a></td><td>{{time}}</td>
-      {{/url}}
+      <td>{{domain}}</td><td>{{elapsed}}</td>
     </tr>
-    {{/logs}}
+  {{/summary}}
+  </table>
+  <table class="table table-hover table-condensed">
+  {{#logs}}
+    {{#url}}
+    <tr>
+      <td><a href="{{url}}">{{domain}}</a></td><td>{{time}}</td>
+    </tr>
+    {{/url}}
+  {{/logs}}
   </table>
   </script>
 </head>
