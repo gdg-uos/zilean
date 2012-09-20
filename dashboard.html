@@ -13,11 +13,13 @@
   </table>
   <table class="table table-hover table-condensed">
   {{#logs}}
-    {{#url}}
     <tr>
-      <td><a href="{{url}}">{{domain}}</a></td><td>{{time}}</td>
+      <td>
+        {{#url}}<a href="{{url}}">{{domain}}</a>{{/url}}
+        {{^url}}(none){{/url}}
+      </td>
+      <td>{{time}}</td>
     </tr>
-    {{/url}}
   {{/logs}}
   </table>
   </script>
