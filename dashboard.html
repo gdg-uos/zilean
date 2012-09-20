@@ -2,9 +2,11 @@
 <html>
 <head>
   <title>Zilean Dashboard</title>
+  <link rel="shortcut icon" type="image/png" href="res/icon/development.png" />
   <link rel="stylesheet" href="contrib/bootstrap/css/bootstrap.css" />
   <script type="text/mustache" id="template">
   <table class="table table-hover">
+    <caption>Most visited</caption>
   {{#summary}}
     <tr>
       <td>{{domain}}</td><td>{{elapsed}}</td>
@@ -23,8 +25,22 @@
   {{/logs}}
   </table>
   </script>
+  <style>
+    body { padding: 40px; }
+    .navbar .brand { margin-left: 0; }
+  </style>
 </head>
 <body class="container">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Zilean</a>
+    <ul class="nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+    </ul>
+  </div>
+</div>
 <section id="daily">
   <div class="chart"></div>
 </section>
