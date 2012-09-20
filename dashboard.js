@@ -1,4 +1,5 @@
-/*global window:true,document:true,chrome:true,Mustache:true,Raphael:true */
+/*global window:true,document:true,chrome:true,Mustache:true,Raphael:true,
+         moment:true */
 (function () {
 'use strict';
 
@@ -52,9 +53,12 @@ var logElem = document.getElementById('log');
 var template = document.getElementById('template').innerHTML;
 var context = {
   logs: data,
-  summary: summary,
-  domain: function() {
+  summary: summary.slice(0, 5),
+  domain: function () {
     return parseURL(this.url).hostname;
+  },
+  elapsed_time: function () {
+    return moment.duration(this.elapsed).humanize();
   }
 };
 logElem.innerHTML = Mustache.render(template, context);
