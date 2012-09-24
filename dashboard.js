@@ -3,6 +3,8 @@
 (function () {
 'use strict';
 
+moment.lang(window.navigator.language);
+
 function parseURL(url) {
   var parser = document.createElement('a');
   parser.href = url.replace(/^view-source:/, '');
