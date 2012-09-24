@@ -14,7 +14,7 @@ function log(tab, time) {
     }
   }
   var logs = JSON.parse(window.localStorage['logs'] || '[]');
-  if (url !== logs[logs.length - 1].url) {
+  if (logs.length > 0 && url !== logs[logs.length - 1].url) {
     logs.push({url: url, time: time});
     window.localStorage['logs'] = JSON.stringify(logs);
   }
