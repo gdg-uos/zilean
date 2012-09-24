@@ -3,6 +3,7 @@
 'use strict';
 
 var dashboardURL = chrome.extension.getURL('dashboard.html');
+var currentTabId = null;
 
 function log(tab, time) {
   var url = null;
@@ -13,17 +14,16 @@ function log(tab, time) {
     }
   }
   var logs = JSON.parse(window.localStorage['logs'] || '[]');
-  logs.push({url: url, time: time});
-  window.localStorage['logs'] = JSON.stringify(logs);
+  if (url !== logs[logs.length - 1].url) {
+    logs.push({url: url, time: time});
+    window.localStorage['logs'] = JSON.stringify(logs);
+  }
 }
 
 function tabChanged(tab) {
   var now = new Date();
-  if (tab !== null) {
-    log(tab, now);
-  } else {
-    log(null, now);
-  }
+  currentTabId = (tab !== null) ? tab.id : null;
+  log(tab, now);
 }
 
 chrome.browserAction.onClicked.addListener(function (tab) {
@@ -40,6 +40,12 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
   chrome.tabs.get(activeInfo.tabId, function (tab) {
     tabChanged(tab);
   });
+});
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if (tabId === currentTabId && changeInfo['url']) {
+    log(tab, new Date());
+  }
 });
 
 chrome.windows.onFocusChanged.addListener(function(windowId) {
