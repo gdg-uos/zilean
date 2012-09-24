@@ -22,7 +22,7 @@ function log(tab, time) {
 
 function tabChanged(tab) {
   var now = new Date();
-  currentTabId = (tab !== null) ? tab.id : null;
+  currentTabId = tab ? tab.id : null;
   log(tab, now);
 }
 
