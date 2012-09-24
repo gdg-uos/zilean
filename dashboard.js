@@ -51,10 +51,10 @@ for (i in _summary) {
 }
 summary.sort(function (a, b) { return b.elapsed - a.elapsed; });
 
-var logElem = document.getElementById('log');
-var template = document.getElementById('template').innerHTML;
+var recentLog = data.slice(-20);
+recentLog.reverse();
 var context = {
-  logs: data,
+  logs: recentLog,
   summary: summary.slice(0, 5),
   domain: function () {
     return parseURL(this.url).hostname;
@@ -63,7 +63,10 @@ var context = {
     return moment.duration(this.elapsed).humanize();
   }
 };
-logElem.innerHTML = Mustache.render(template, context);
+var dailyElem = document.getElementById('daily');
+var logElem = document.getElementById('log');
+dailyElem.innerHTML += renderTemplate('template-mostvisited', context);
+logElem.innerHTML = renderTemplate('template-log', context);
 
 var r = Raphael(document.querySelector('#daily .chart'), 780, 400);
 r.piechart(200, 200, 150,
@@ -72,5 +75,11 @@ r.piechart(200, 200, 150,
 var range = now - limit;
 var used = summary.reduce(function (a, b) { return a + b.elapsed; }, 0);
 r.piechart(620, 120, 70, [used, range - used], {legend: ['used', 'unused']});
+
+
+function renderTemplate(template, context) {
+  template = document.getElementById(template).innerHTML;
+  return Mustache.render(template, context);
+}
 
 })();

@@ -4,7 +4,7 @@
   <title>Zilean Dashboard</title>
   <link rel="shortcut icon" type="image/png" href="res/icon/development.png" />
   <link rel="stylesheet" href="contrib/bootstrap/css/bootstrap.css" />
-  <script type="text/mustache" id="template">
+  <script type="text/mustache" id="template-mostvisited">
   <table class="table table-hover">
     <caption>Most visited</caption>
   {{#summary}}
@@ -13,6 +13,8 @@
     </tr>
   {{/summary}}
   </table>
+  </script>
+  <script type="text/mustache" id="template-log">
   <table class="table table-hover table-condensed">
   {{#logs}}
     <tr>
