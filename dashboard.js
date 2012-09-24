@@ -1,6 +1,6 @@
 /*global window:true,document:true,chrome:true,Mustache:true,Raphael:true,
          moment:true */
-(function () {
+(function ($) {
 'use strict';
 
 moment.lang(window.navigator.language);
@@ -63,12 +63,10 @@ var context = {
     return moment.duration(this.elapsed).humanize();
   }
 };
-var dailyElem = document.getElementById('daily');
-var logElem = document.getElementById('log');
-dailyElem.innerHTML += renderTemplate('template-mostvisited', context);
-logElem.innerHTML = renderTemplate('template-log', context);
+$('#daily').append(renderTemplate('#template-mostvisited', context));
+$('#log').html(renderTemplate('#template-log', context));
 
-var r = Raphael(document.querySelector('#daily .chart'), 780, 400);
+var r = Raphael($('#daily .chart')[0], 780, 400);
 r.piechart(200, 200, 150,
            summary.map(function (e) { return e.elapsed; }),
            {legend: summary.map(function (e) { return e.domain; })});
@@ -78,8 +76,8 @@ r.piechart(620, 120, 70, [used, range - used], {legend: ['used', 'unused']});
 
 
 function renderTemplate(template, context) {
-  template = document.getElementById(template).innerHTML;
+  template = $(template).html();
   return Mustache.render(template, context);
 }
 
-})();
+})(Zepto);
