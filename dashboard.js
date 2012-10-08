@@ -19,7 +19,7 @@ function parseURL(url) {
   };
 }
 
-var data = JSON.parse(window.localStorage.logs);
+var data = JSON.parse(window.localStorage.logs || '[]');
 var now = new Date();
 var limit = new Date(now.getTime());
 limit.setDate(limit.getDate() - 1);
